@@ -24,11 +24,7 @@ pipeline {
             steps {
                 echo 'Building image...'
                 dir('app'){
-                    sh '''
-                        docker build -t magarp0723/todo-list-app:v1 .
-                        docker login -u ${USERNAME} -p ${PASSWORD}
-                        docker push magarp0723/todo-list-app:v1
-                    '''
+                    sh 'docker build -t magarp0723/todo-list-app:v1 .'            
                 }
             }
         }
