@@ -26,6 +26,7 @@ pipeline {
                 dir('app'){
                     sh '''
                     docker images
+                    docker build -t todo-list-app .
                     '''            
                 }
             }
