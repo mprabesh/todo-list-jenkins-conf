@@ -20,11 +20,26 @@ pipeline {
             }
         }
 
-        // stage('Test'){
-        //     steps {
-        //         sh 'curl -I localhost:300'
-        //     }
-        // }
+        stage('Building image and pushing to dockerhub') {
+            steps {
+                echo 'Building image...'
+                dir('app'){
+                    withCredentials([usernamePassword(credentialsId: 'Dockerhub-credentials', passwordVariable: 'PASSWORD', usernameVariable: 'USERNAME')]) {
+                        sh '''
+                            docker build -t magarp0723/todo-list-app:v1 .
+                            docker login -u ${USERNAME} -p ${PASSWORD}
+                            docker push magarp0723/todo-list-app:v1
+                        '''
+                    }
+                }
+            }
+        }
+
+        stage('Completed'){
+            steps {
+                echo 'Completed'
+            }
+        }
 
         // stage('Build and Push') {
         //     steps {
