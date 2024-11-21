@@ -24,7 +24,9 @@ pipeline {
             steps {
                 echo 'Building image...'
                 dir('app'){
-                    sh 'docker build -t magarp0723/todo-list-app:v1 .'            
+                    sh '''
+                    docker images
+                    '''            
                 }
             }
         }
