@@ -24,13 +24,11 @@ pipeline {
             steps {
                 echo 'Building image...'
                 dir('app'){
-                    withCredentials([usernamePassword(credentialsId: 'Dockerhub-credentials', passwordVariable: 'PASSWORD', usernameVariable: 'USERNAME')]) {
-                        sh '''
-                            docker build -t magarp0723/todo-list-app:v1 .
-                            docker login -u ${USERNAME} -p ${PASSWORD}
-                            docker push magarp0723/todo-list-app:v1
-                        '''
-                    }
+                    sh '''
+                        docker build -t magarp0723/todo-list-app:v1 .
+                        docker login -u ${USERNAME} -p ${PASSWORD}
+                        docker push magarp0723/todo-list-app:v1
+                    '''
                 }
             }
         }
